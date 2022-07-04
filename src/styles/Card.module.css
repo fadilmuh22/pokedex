@@ -1,0 +1,92 @@
+.cardContainer {
+    min-width: 150px;
+    min-height: 120px;
+
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 10px 5px 5px 10px;
+
+    border-radius: 20px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: rgba(255, 255, 255, 0.6);
+    overflow: hidden;
+}
+
+.cardContainer:hover {
+    filter: brightness(90%);
+}
+
+
+.pokeName {
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: capitalize;
+
+    margin-bottom: 10px;
+}
+
+.pokeType {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    color: white;
+    font-size: 10px;
+    text-align: center;
+    text-transform: capitalize;
+
+    border-radius: 30px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+    margin-bottom: 5px;
+    padding: 0.3rem 0.7rem;
+
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.pokeImage {
+    position: absolute;
+    top: -20px;
+    right: -5px;
+}
+
+.pokeImage svg {
+    position: absolute;
+    top: 2rem;
+    left: 1.5rem;
+    height: fit-content;
+    width: fit-content;
+    fill: rgba(255, 255, 255, 0.7);
+    z-index: 2;
+}
+
+.pokeImage img {
+    position: relative;
+    width: 100px;
+    height: 100px;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    z-index: 2;
+}
+
+@media only screen and (min-width: 500px) {
+    .cardContainer {
+        width: 100%;
+        overflow: visible !important;
+    }
+
+    .pokeImage {
+        top: -4rem;
+    }
+
+    .pokeImage img {
+        width: 150px;
+        height: 150px;
+    }
+}

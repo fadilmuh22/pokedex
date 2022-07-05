@@ -4,7 +4,7 @@ interface ColorsTheme {
   };
 }
 
-const PokeColors: ColorsTheme = {
+export const PokeColors: ColorsTheme = {
   colors: {
     type: {
       bug: '#8CB230',
@@ -70,5 +70,3 @@ const PokeColors: ColorsTheme = {
     },
   },
 };
-
-export default PokeColors;

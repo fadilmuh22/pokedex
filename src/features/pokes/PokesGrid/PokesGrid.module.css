@@ -1,0 +1,70 @@
+#pokesGridArea {
+    overflow: scroll;
+    scrollbar-width: 0;
+}
+
+#pokesGridArea::-webkit-scrollbar {
+    width: 2px;
+}
+
+/* Track */
+#pokesGridArea::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+#pokesGridArea::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(187, 190, 38, 0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.pokesGrid::-webkit-scrollbar {
+    display: none;
+}
+
+@media only screen and (min-width: 500px) {
+    #pokesGridArea {
+        overflow-x: hidden;
+        padding: .6rem 0;
+    }
+
+    .pokesGrid {
+        gap: 1rem !important;
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+    #pokesGridArea::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    #pokesGridArea {
+        padding: .6rem 0;
+        overflow-x: hidden;
+    }
+
+    .pokesGrid {
+        grid-template-columns: 1fr 1fr 1fr !important;
+        gap: 1rem !important;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    #pokesGridArea {
+        padding: .6rem 0;
+        overflow-x: hidden;
+    }
+
+    .pokesGrid {
+        grid-template-columns: 1fr 1fr 1fr 1fr !important;
+        gap: 1.5rem !important;
+
+    }
+}

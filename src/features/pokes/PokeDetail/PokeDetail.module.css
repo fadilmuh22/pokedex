@@ -1,0 +1,171 @@
+.pokeName {
+    color: white;
+    font-size: 24px;
+    font-weight: 500;
+    text-transform: capitalize;
+
+    margin-bottom: .5rem;
+}
+
+.pokeId {
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+
+    margin-top: 1rem;
+}
+
+
+.pokeType {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    color: white;
+    font-size: 10px;
+    text-align: center;
+    text-transform: capitalize;
+
+    border-radius: 30px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+    margin-bottom: 5px;
+    padding: 0.3rem 0.7rem;
+
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.pokeImage {
+    position: fixed;
+    top: 47%;
+    right: 50%;
+    transform: translate(50%, -50%);
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 3;
+}
+
+.pokeBallArt {
+    position: fixed;
+    top: 38%;
+    right: 50%;
+    transform: translate(50%, -50%);
+
+    height: 30vh;
+    width: 30vh;
+
+    fill: rgba(255, 255, 255, 0.2);
+    z-index: 2;
+}
+
+.pokeImageArt {
+    position: absolute;
+    top: 29%;
+    right: 50%;
+    transform: translate(50%, -50%);
+
+    width: 30vh;
+    height: 30vh;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    z-index: 4;
+}
+
+.pokeDetailTabContainer {
+    position: absolute;
+    top: 40vh;
+    right: -20px;
+    overflow: scroll;
+
+    width: 100vw;
+    height: 60vh;
+    padding: 30px 20px;
+    padding-bottom: 56px;
+
+    background-color: white;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+
+    z-index: 3;
+}
+
+.pokeAboutTable {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+
+    table-layout: fixed;
+}
+
+.pokeAboutTable tr {
+    margin-bottom: 1rem;
+}
+
+.pokeAboutTable td {
+    text-align: left;
+
+    padding: 0.25rem 0;
+}
+
+.pokeAboutTable tr>td:first-child {
+    width: 5rem;
+    color: dimgray;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.pokeAboutTable tr>td:nth-child(2) {
+    color: black;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.statsTabTitle {
+    margin: 20px 0 10px 0;
+
+    color: black;
+    font-size: 18;
+    font-weight: 500;
+}
+
+.pokeStatsTable {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+}
+
+.pokeStatsTable tr {
+    margin-bottom: 1rem;
+}
+
+.pokeStatsTable td {
+    width: 5rem;
+    text-align: left;
+
+    padding: 0.25rem 0;
+}
+
+.pokeStatsTable tr>td:first-child {
+    color: dimgray;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.pokeStatsTable tr>td:nth-child(2) {
+    width: 2rem;
+    color: black;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.statsTabTitle {
+    margin: 20px 0 10px 0;
+
+    color: black;
+    font-size: 18;
+    font-weight: 500;
+}

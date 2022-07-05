@@ -1,0 +1,23 @@
+.pokeDetailPage {
+    margin: 0;
+    padding: 30px 20px;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.pokeball {
+    position: fixed;
+    top: -3rem;
+    right: -3.5rem;
+    height: 180px;
+    width: 180px;
+    fill: rgba(0, 0, 0, 0.2);
+    z-index: -1;
+}
+
+.titlePage {
+    font-size: 28px;
+    font-weight: bold;
+
+    margin-bottom: 20px;
+}

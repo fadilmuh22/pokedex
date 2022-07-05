@@ -1,9 +1,9 @@
-export interface PokePagination {
+export interface PokePaginationData {
   name: string;
   url: string;
 }
 
-export interface PokeDetail {
+export interface PokeDetailData {
   abilities: Ability[];
   base_experience: number;
   forms: Species[];
@@ -62,24 +62,24 @@ export interface VersionGroupDetail {
 }
 
 export interface GenerationV {
-  "black-white": Sprites;
+  'black-white': Sprites;
 }
 
 export interface GenerationIv {
-  "diamond-pearl": Sprites;
-  "heartgold-soulsilver": Sprites;
+  'diamond-pearl': Sprites;
+  'heartgold-soulsilver': Sprites;
   platinum: Sprites;
 }
 
 export interface Versions {
-  "generation-i": GenerationI;
-  "generation-ii": GenerationIi;
-  "generation-iii": GenerationIii;
-  "generation-iv": GenerationIv;
-  "generation-v": GenerationV;
-  "generation-vi": { [key: string]: Home };
-  "generation-vii": GenerationVii;
-  "generation-viii": GenerationViii;
+  'generation-i': GenerationI;
+  'generation-ii': GenerationIi;
+  'generation-iii': GenerationIii;
+  'generation-iv': GenerationIv;
+  'generation-v': GenerationV;
+  'generation-vi': { [key: string]: Home };
+  'generation-vii': GenerationVii;
+  'generation-viii': GenerationViii;
 }
 
 export interface Sprites {
@@ -97,7 +97,7 @@ export interface Sprites {
 }
 
 export interface GenerationI {
-  "red-blue": RedBlue;
+  'red-blue': RedBlue;
   yellow: RedBlue;
 }
 
@@ -137,8 +137,8 @@ export interface Gold {
 
 export interface GenerationIii {
   emerald: Emerald;
-  "firered-leafgreen": Gold;
-  "ruby-sapphire": Gold;
+  'firered-leafgreen': Gold;
+  'ruby-sapphire': Gold;
 }
 
 export interface Emerald {
@@ -155,7 +155,7 @@ export interface Home {
 
 export interface GenerationVii {
   icons: DreamWorld;
-  "ultra-sun-ultra-moon": Home;
+  'ultra-sun-ultra-moon': Home;
 }
 
 export interface DreamWorld {
@@ -170,7 +170,7 @@ export interface GenerationViii {
 export interface Other {
   dream_world: DreamWorld;
   home: Home;
-  "official-artwork": OfficialArtwork;
+  'official-artwork': OfficialArtwork;
 }
 
 export interface OfficialArtwork {

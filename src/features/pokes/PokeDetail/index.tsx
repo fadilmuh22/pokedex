@@ -8,11 +8,13 @@ import {
   TabPanels,
   Tabs,
 } from '@chakra-ui/react';
+import { ResponsiveRadar } from '@nivo/radar';
 
 import { PokeDetailData } from '../PokeType';
 
 import PokeBall from '~/assets/pokeball.svg';
-import styles from './PokeDetail.module.css';
+import styles from './style.module.css';
+import { statSync } from 'fs';
 
 export const PokeDetail = ({
   name,
@@ -23,8 +25,9 @@ export const PokeDetail = ({
   pokeDetail: PokeDetailData;
   pokeSpecies: any;
 }) => {
-  const isPokeDetailEmpty = () => Object.keys(pokeDetail).length == 0;
-  const isPokeSpeciesEmpty = () => Object.keys(pokeSpecies).length == 0;
+  const isPokeDetailEmpty = () => !pokeDetail || Object.keys(pokeDetail).length == 0;
+  const isPokeSpeciesEmpty = () =>
+    !pokeSpecies || Object.keys(pokeSpecies).length == 0;
 
   return (
     <Box className="pokeDetailComponent" w={'100%'} h={'100%'} position={'relative'}>
@@ -84,6 +87,53 @@ const PokeDetailTabs = ({
   pokeDetail.stats.forEach((ps) => {
     stats[ps.stat.name] = ps.base_stat;
   });
+
+  const statsToRadarRecord = () => {
+    let record: any[] = [];
+    Object.keys(stats).forEach((sk) => record.push({ name: sk, value: stats[sk] }));
+    return record;
+  };
+
+  const statsTotal = () => Object.values(stats).reduce((a, b) => a + b, 0);
+
+  // return (
+  //   <ResponsiveRadar
+  //     data={data}
+  //     keys={['chardonay', 'carmenere', 'syrah']}
+  //     indexBy="taste"
+  //     valueFormat=">-.2f"
+  //     margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
+  //     borderColor={{ from: 'color' }}
+  //     gridLabelOffset={36}
+  //     dotSize={10}
+  //     dotColor={{ theme: 'background' }}
+  //     dotBorderWidth={2}
+  //     colors={{ scheme: 'nivo' }}
+  //     blendMode="multiply"
+  //     motionConfig="wobbly"
+  //     legends={[
+  //       {
+  //         anchor: 'top-left',
+  //         direction: 'column',
+  //         translateX: -50,
+  //         translateY: -40,
+  //         itemWidth: 80,
+  //         itemHeight: 20,
+  //         itemTextColor: '#999',
+  //         symbolSize: 12,
+  //         symbolShape: 'circle',
+  //         effects: [
+  //           {
+  //             on: 'hover',
+  //             style: {
+  //               itemTextColor: '#000',
+  //             },
+  //           },
+  //         ],
+  //       },
+  //     ]}
+  //   />
+  // );
 
   return (
     <Tabs
@@ -208,17 +258,52 @@ const PokeDetailTabs = ({
               </tr>
               <tr>
                 <td>Total</td>
-                <td>{Object.values(stats).reduce((a, b) => a + b, 0)}</td>
+                <td>{statsTotal()}</td>
                 <td>
-                  <PokeStatsProgress
-                    value={
-                      (Object.values(stats).reduce((a, b) => a + b, 0) / 720) * 100
-                    }
-                  />
+                  <PokeStatsProgress value={(statsTotal() / 720) * 100} />
                 </td>
               </tr>
             </tbody>
           </table>
+
+          <Box w={'100%'} h={'40vh'}>
+            <ResponsiveRadar
+              data={statsToRadarRecord()}
+              keys={['value']}
+              indexBy="name"
+              valueFormat=">-.2f"
+              maxValue={100}
+              margin={{ top: 0, right: 80, bottom: 0, left: 80 }}
+              borderColor={{ from: 'color' }}
+              gridLabelOffset={10}
+              dotSize={10}
+              dotColor={{ theme: 'background' }}
+              dotBorderWidth={1}
+              colors={{ scheme: 'nivo' }}
+              blendMode="normal"
+              // legends={[
+              //   {
+              //     anchor: 'top-left',
+              //     direction: 'column',
+              //     translateX: -50,
+              //     translateY: -40,
+              //     itemWidth: 80,
+              //     itemHeight: 20,
+              //     itemTextColor: '#999',
+              //     symbolSize: 12,
+              //     symbolShape: 'circle',
+              //     effects: [
+              //       {
+              //         on: 'hover',
+              //         style: {
+              //           itemTextColor: '#000',
+              //         },
+              //       },
+              //     ],
+              //   },
+              // ]}
+            />
+          </Box>
 
           <p className={styles.statsTabTitle}>Type defenses</p>
           <p>

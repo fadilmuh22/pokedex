@@ -1,10 +1,10 @@
-import { Grid, Flex } from '@chakra-ui/react';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
+
 import { useSelector } from 'react-redux';
-import { useAppDispatch, useAppSelector } from '~/app/hooks';
+import { Grid, Flex } from '@chakra-ui/react';
 
+import { useAppDispatch, useAppSelector, useOnScreen } from '~/app/hooks';
 import { PokeCard } from '../PokeCard';
-
 import {
   fetchPokeListAsync,
   nextPage,
@@ -13,7 +13,7 @@ import {
   selectPokeStateStatus,
 } from '../PokeSlice';
 
-import styles from './PokesGrid.module.css';
+import styles from './style.module.css';
 
 export const PokesGrid = () => {
   const loadingRef = useRef(null);
@@ -23,33 +23,12 @@ export const PokesGrid = () => {
   const paginationOffset = useAppSelector(selectPaginationOffset);
   const pokeStateStatus = useSelector(selectPokeStateStatus);
 
-  const handleObserver = (
-    entries: IntersectionObserverEntry[],
-    observe: IntersectionObserver,
-  ): void => {
-    const [entry] = entries;
-    if (entry.isIntersecting) {
-      dispatch(nextPage());
-    }
-  };
+  const isLoadingOnScreen = useOnScreen(loadingRef);
 
   useEffect(() => {
-    console.log(loadingRef);
-    const options = {
-      root: document.querySelector('#pokesGridArea'),
-      rootMargin: '0px',
-      threshold: 1.0,
-    };
-
-    let observer = new IntersectionObserver(handleObserver, options);
-    if (loadingRef.current) observer.observe(loadingRef.current);
-
-    return () => {
-      if (loadingRef.current) observer.unobserve(loadingRef.current);
-    };
-
+    if (isLoadingOnScreen) dispatch(nextPage());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isLoadingOnScreen]);
 
   useEffect(() => {
     dispatch(fetchPokeListAsync(paginationOffset));

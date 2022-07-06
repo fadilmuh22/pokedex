@@ -5,7 +5,7 @@ import Head from 'next/head';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { Flex } from '@chakra-ui/react';
 
-import styles from './IndexPage.module.css';
+import styles from './style.module.css';
 
 import PokeBall from '../assets/pokeball.svg';
 import { PokesGrid } from '~/features/pokes/PokesGrid';

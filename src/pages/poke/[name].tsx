@@ -1,30 +1,29 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
-import api from '~/services/api';
-import { PokeDetailData } from '~/features/pokes/PokeType';
-import { PokeDetail } from '~/features/pokes/PokeDetail';
-
-import styles from './PokeDetailPage.module.css';
-import { ChevronLeftIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { Flex } from '@chakra-ui/react';
-import { fetchPokeDetail, fetchPokeSpecies } from '~/features/pokes/PokeApi';
+import { ChevronLeftIcon, HamburgerIcon } from '@chakra-ui/icons';
+
+import { fetchPokeSpecies } from '~/api';
+import { useAppDispatch, useAppSelector } from '~/app/hooks';
+import { PokeDetail } from '~/features/pokes/PokeDetail';
+import { fetchPokeDetailAsync, selectPokeDetail } from '~/features/pokes/PokeSlice';
 import { PokeColors } from '~/features/pokes/PokeColors';
+
+import styles from './style.module.css';
 
 const PokeDetailPage = () => {
   const router = useRouter();
   const { name } = router.query;
 
-  const [pokeDetail, setPokeDetail] = useState({} as PokeDetailData);
-  const [pokeSpecies, setPokeSpecies] = useState({});
+  const dispatch = useAppDispatch();
 
-  const isPokeDetailEmpty = () => Object.keys(pokeDetail).length == 0;
+  const pokeDetail = useAppSelector(selectPokeDetail)[name as string];
+  const [pokeSpecies, setPokeSpecies] = useState({});
 
   useEffect(() => {
     if (name) {
-      fetchPokeDetail(name as string).then((res) => {
-        setPokeDetail(res.data);
-      });
+      dispatch(fetchPokeDetailAsync(name as string));
 
       fetchPokeSpecies(name as string).then((res) => {
         setPokeSpecies(res.data);
@@ -32,6 +31,8 @@ const PokeDetailPage = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name]);
+
+  const isPokeDetailEmpty = () => !pokeDetail || Object.keys(pokeDetail).length == 0;
 
   return (
     <div

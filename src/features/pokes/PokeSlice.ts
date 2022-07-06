@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import type { AppState, AppThunk } from '../../app/store';
-import { fetchPokeDetail, fetchPokeList } from './PokeApi';
+import { fetchPokeDetail, fetchPokeList } from '~/api';
 import { PokeDetailData, PokePaginationData } from './PokeType';
 
 export interface PokeState {

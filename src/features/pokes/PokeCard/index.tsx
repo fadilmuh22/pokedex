@@ -1,27 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+
+import Link from 'next/link';
+import { useSelector } from 'react-redux';
 import { Flex } from '@chakra-ui/react';
 
-import { PokeDetailData, PokePaginationData } from '~/features/pokes/PokeType';
-import { fetchPokeDetail } from '../PokeApi';
 import { PokeColors } from '../PokeColors';
-
-import styles from './PokeCard.module.css';
+import styles from './style.module.css';
 import PokeBall from '~/assets/pokeball.svg';
-import Link from 'next/link';
+
+import { fetchPokeDetailAsync, selectPokeDetail } from '../PokeSlice';
+import { useAppDispatch } from '~/app/hooks';
+import { PokePaginationData } from '../PokeType';
 
 export const PokeCard = ({ name, url }: PokePaginationData) => {
-  const [pokeDetail, setPokeDetail] = useState({} as PokeDetailData);
-
-  const isPokeDetailEmpty = () => Object.keys(pokeDetail).length == 0;
+  const dispatch = useAppDispatch();
+  const pokeDetail = useSelector(selectPokeDetail)[name];
 
   useEffect(() => {
     if (name) {
-      fetchPokeDetail(name).then((res) => {
-        setPokeDetail(res.data);
-      });
+      dispatch(fetchPokeDetailAsync(name));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name]);
+
+  const isPokeDetailEmpty = () => !pokeDetail || Object.keys(pokeDetail).length == 0;
 
   return (
     <Link href={`/poke/${name}`}>

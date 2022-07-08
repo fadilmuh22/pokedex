@@ -169,3 +169,68 @@
     font-size: 18;
     font-weight: 500;
 }
+
+.statsBarRadar {
+    display: flex;
+    flex-direction: column;
+}
+
+@media only screen and (min-width: 768px) {
+    .statsBarRadar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .baseStatsRadar {
+        width: 50% !important;
+    }
+
+    .statsProgress {
+        width: 25vw !important;
+    }
+}
+
+.evoChainTitle {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.evoImageContainer {
+    position: relative;
+}
+
+.evoImageContainer svg {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+
+    z-index: -1;
+
+    fill: rgba(220, 220, 220, 0.2);
+}
+
+
+.evoImageContainer img {
+    width: 15vh;
+    height: 15vh;
+    z-index: 3;
+}
+
+.minLevelTitle {
+    font-size: 12px;
+    font-weight: 500;
+
+    text-align: center;
+}
+
+.pokeEvoName {
+    font-size: 12px;
+    font-weight: 500;
+
+    text-align: center;
+}

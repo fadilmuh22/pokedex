@@ -15,5 +15,8 @@ export const fetchPokeDetail = (name: string) => {
 export const fetchPokeSpecies = (name: string) => {
   return api.get(`/pokemon-species/${name}`);
 };
+export const fetchEvolutionChain = (id: string) => {
+  return api.get(`/evolution-chain/${id}`);
+};
 
 export default api;

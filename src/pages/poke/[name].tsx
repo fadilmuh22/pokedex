@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Flex } from '@chakra-ui/react';
 import { ChevronLeftIcon, HamburgerIcon } from '@chakra-ui/icons';
 
-import { fetchPokeSpecies } from '~/api';
+import { fetchEvolutionChain, fetchPokeSpecies } from '~/api';
 import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import { PokeDetail } from '~/features/pokes/PokeDetail';
 import { fetchPokeDetailAsync, selectPokeDetail } from '~/features/pokes/PokeSlice';
@@ -19,7 +19,10 @@ const PokeDetailPage = () => {
   const dispatch = useAppDispatch();
 
   const pokeDetail = useAppSelector(selectPokeDetail)[name as string];
-  const [pokeSpecies, setPokeSpecies] = useState({});
+  const [pokeSpecies, setPokeSpecies] = useState({} as any);
+  const [pokeEvoChain, setPokeEvoChain] = useState({} as any);
+
+  const [pokeEvo, setPokeEvo] = useState([] as any[]);
 
   useEffect(() => {
     if (name) {
@@ -31,6 +34,41 @@ const PokeDetailPage = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name]);
+
+  useEffect(() => {
+    if (!!pokeSpecies && Object.keys(pokeSpecies).length != 0) {
+      let evoChainId = pokeSpecies.evolution_chain.url.split('/')[6];
+      fetchEvolutionChain(evoChainId).then((res) => {
+        setPokeEvoChain(res.data);
+      });
+    }
+  }, [pokeSpecies]);
+
+  useEffect(() => {
+    if (Object.keys(pokeEvoChain).length != 0) {
+      let evoChain: any[] = [];
+      // const evoDetail =
+      //   pokeEvoChain.chain.evolution_details.length == 0
+      //     ? null
+      //     : pokeEvoChain.chain.evolution_details[0];
+      // evoChain = [...pokeEvo, { ...pokeEvoChain.chain.species, ...evoDetail }];
+
+      let chain = pokeEvoChain.chain;
+      do {
+        evoChain = [
+          ...evoChain,
+          { ...chain.species, ...chain.evolution_details[0] },
+        ];
+        chain = chain.evolves_to[0];
+      } while (
+        (chain && !!chain.species.name) ||
+        (chain && chain.evolves_to[0] != 0)
+      );
+
+      setPokeEvo(evoChain);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pokeEvoChain]);
 
   const isPokeDetailEmpty = () => !pokeDetail || Object.keys(pokeDetail).length == 0;
 
@@ -64,6 +102,8 @@ const PokeDetailPage = () => {
         name={name as string}
         pokeDetail={pokeDetail}
         pokeSpecies={pokeSpecies}
+        pokeEvoChain={pokeEvoChain}
+        pokeEvo={pokeEvo}
       />
     </div>
   );
